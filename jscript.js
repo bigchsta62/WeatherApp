@@ -4,13 +4,19 @@ const month = moment().format("MM");
 const day = moment().format("DD");
 console.log(month, day);
 const historyURL = "http://numbersapi.com/" + month + "/" + day + "/date";
-
-const basicURL =
-  "https://api.openweathermap.org/data/2.5/weather?q=" +
-  $("#citySearch").val() +
-  "&appid=" +
-  weatherKey;
-
+$("#searchBtn").on("click", function(){
+    const basicURL =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+        $("#searchSpace").val() +
+        "&appid=" +
+        weatherKey;
+    $.ajax({
+        url: basicURL,
+        method: "GET",
+        }).then(function (response) {
+        console.log(response);
+    });
+})
 // const fivedayURL =
 // "https://api.openweathermap.org/data/2.5/forecast?q=" +
 // $("#citySearch").val() +
@@ -34,9 +40,4 @@ $.ajax({
   $("#history").text(response);
 });
 
-$.ajax({
-  url: basicURL,
-  method: "GET",
-}).then(function (response) {
-  console.log(response);
-});
+
