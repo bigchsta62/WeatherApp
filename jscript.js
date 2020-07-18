@@ -58,6 +58,7 @@ $(document).ready(function () {
       }).then(function (onecall) {
         console.log(onecall);
         for (let i = 0; i < 6; i++) {
+          $('#day' + i).empty();
           console.log(i);
           const todayIcon = onecall.daily[i].weather[0].icon;
           console.log(todayIcon) 
