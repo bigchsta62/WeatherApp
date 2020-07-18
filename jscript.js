@@ -1,9 +1,11 @@
 $(document).ready(function () {
   const weatherKey = "1893546eadda6ea230333e67a557c549";
-
+  const date = moment().format("MMMM Do YYYY")
+  console.log(date)
   const month = moment().format("MM");
   const day = moment().format("DD");
   console.log(month, day);
+
   const historyURL = "http://numbersapi.com/" + month + "/" + day + "/date";
   let lat = "";
   let long = "";
@@ -20,12 +22,12 @@ $(document).ready(function () {
 
   function fiveDay() {
     fivedayURL =
-    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
-    lat +
-    "&lon=" +
-    long +
-    "&appid=" +
-    weatherKey;
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      lat +
+      "&lon=" +
+      long +
+      "&exclude=current,minutely,hourly&appid=" +
+      weatherKey;
   }
   function weatherAjax() {
     $.ajax({
@@ -34,11 +36,73 @@ $(document).ready(function () {
     }).then(function (cityData) {
       console.log(cityData);
       lat = cityData.coord.lat;
-      long =cityData.coord.lon;
+      long = cityData.coord.lon;
       console.log("current coords", lat, long)
       fiveDay()
       console.log("fiveDayUrl", fivedayURL)
-      
+      const unix = cityData.dt;
+      const milli = unix * 1000;
+      const date = new Date(milli);
+      const humanized = date.toLocaleString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+      $('#cityName').text(cityData.name);
+      $('#date').text(humanized);
+
+      $.ajax({
+        url: fivedayURL,
+        method: "GET",
+      }).then(function (onecall) {
+        console.log(onecall);
+        for (let i = 0; i < 6; i++) {
+          console.log(i);
+          const todayIcon = onecall.daily[i].weather[0].icon;
+          console.log(todayIcon) 
+          
+          const weatherIcon = $('<img>');
+          weatherIcon.attr('src', 'https://openweathermap.org/img/w/' + todayIcon + '.png')
+          
+          const temp = $('<p>');
+          temp.text('Temperature: ');          
+
+          const ul = $('<ul>');
+          const morn = $('<li>');
+          morn.text('Morning: ' + Math.floor(((onecall.daily[i].temp.morn) - 273.15) * 1.8 + 32) + '°F');
+          
+          const day = $('<li>');
+          day.text('Day: ' + Math.floor(((onecall.daily[i].temp.day) - 273.15) * 1.8 + 32) + '°F');
+          
+          const eve = $('<li>');
+          eve.text('Evening: ' + Math.floor(((onecall.daily[i].temp.eve) - 273.15) * 1.8 + 32) + '°F');          
+          
+          const humid = $('<p>');
+          humid.text('Humidity: ' + onecall.daily[i].humidity + '%');
+          
+          const uvi = $('<p>');
+          uvi.text('UV Index: ' + onecall.daily[i].uvi);
+
+          ul.append(morn, day, eve);
+          $('#day' + i).append(weatherIcon, temp, ul, humid, uvi);
+
+
+
+          
+        
+          //Weather icon `<img src="https://openweathermap.org/img/w/${todayIcon}.png"></img>`
+          //Temperature: morn, day, eve  (Math.floor(((onecall.daily[i].temp.morn) - 273.15) * 1.8 + 32)); °
+            // morn =
+            // day =
+            // eve =
+          //Humidity:  %
+          //uv index: 
+          
+        }
+
+      })
+
     });
   }
 
@@ -79,3 +143,4 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 });
+
