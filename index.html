@@ -11,11 +11,12 @@
 </head>
 
 <body>
-    //This container holds the weather and today in history jumbotrons
+   <!-- This container holds the weather and today in history jumbotrons -->
     <div class="container-fluid">
 
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand">Weather & History</a>
+            <h5 class="text-light" id="date"></h5>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Select a City" aria-label="Search"
                     id="searchSpace">
@@ -23,10 +24,13 @@
             </form>
         </nav>
         <!-- Weather section -->
-        <div class="jumbotron">
+        <div class=" jumbotron">
+            <div></div>
             <div class="container" id="container1">
-                <h1 class="display-4" id="cityName">Weather </h1>
-                <span id="date"></span>
+                <div class="col-12 container">
+                    <h1 class="display-4 font-weight-bold" id="cityName">Weather </h1>
+                    
+                </div>
                 <div class="row row-cols-1">
                     <!-- cards -->
                     <div class="col-xl-2 mb-4">

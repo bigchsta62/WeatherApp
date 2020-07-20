@@ -43,14 +43,17 @@ $(document).ready(function () {
       const unix = cityData.dt;
       const milli = unix * 1000;
       const date = new Date(milli);
-      const humanized = date.toLocaleString("en-US", {
+      const humanizedLong = date.toLocaleString("en-US", {
         weekday: "long",
         month: "long",
         day: "numeric",
         year: "numeric"
       });
+      humanizedShort = date.toLocaleString("en-US", {
+        weekday: "long"
+      });
       $('#cityName').text(cityData.name);
-      $('#date').text(humanized);
+      $('#date').text(humanizedLong);
 
       $.ajax({
         url: fivedayURL,
@@ -61,45 +64,56 @@ $(document).ready(function () {
           $('#day' + i).empty();
           console.log(i);
           const todayIcon = onecall.daily[i].weather[0].icon;
-          console.log(todayIcon) 
-          
+          console.log(todayIcon)
+
+          const unix = onecall.daily[i].dt;
+          const milli = unix * 1000;
+          const date = new Date(milli);
+          humanizedShort = date.toLocaleString("en-US", {
+            weekday: "long"
+          });
+
+          const dates = $('<h6>');
+          dates.text(humanizedShort);
+
           const weatherIcon = $('<img>');
           weatherIcon.attr('src', 'https://openweathermap.org/img/w/' + todayIcon + '.png')
-          
-          const temp = $('<p>');
-          temp.text('Temperature: ');          
+          weatherIcon.html('<span>' + humanizedLong + '</span>');
 
-          const ul = $('<ul>');
-          const morn = $('<li>');
+          const temp = $('<p class="font-weight-bold">');
+          temp.text('Temperature: ');
+
+          const ul = $('<ul class="font-weight-bold">');
+          const morn = $('<li class="font-weight-normal">');
           morn.text('Morning: ' + Math.floor(((onecall.daily[i].temp.morn) - 273.15) * 1.8 + 32) + '°F');
-          
-          const day = $('<li>');
+
+          const day = $('<li class="font-weight-normal">');
           day.text('Day: ' + Math.floor(((onecall.daily[i].temp.day) - 273.15) * 1.8 + 32) + '°F');
-          
-          const eve = $('<li>');
-          eve.text('Evening: ' + Math.floor(((onecall.daily[i].temp.eve) - 273.15) * 1.8 + 32) + '°F');          
-          
-          const humid = $('<p>');
+
+          const eve = $('<li class="font-weight-normal">');
+          eve.text('Evening: ' + Math.floor(((onecall.daily[i].temp.eve) - 273.15) * 1.8 + 32) + '°F');
+
+          const humid = $('<p class="font-weight-bold">');
           humid.text('Humidity: ' + onecall.daily[i].humidity + '%');
-          
-          const uvi = $('<p>');
+
+          const uvi = $('<p class="font-weight-bold">');
           uvi.text('UV Index: ' + onecall.daily[i].uvi);
 
           ul.append(morn, day, eve);
-          $('#day' + i).append(weatherIcon, temp, ul, humid, uvi);
+          $('#day' + i).append(dates, weatherIcon, temp, ul, humid, uvi);
 
 
 
-          
-        
+
+
           //Weather icon `<img src="https://openweathermap.org/img/w/${todayIcon}.png"></img>`
           //Temperature: morn, day, eve  (Math.floor(((onecall.daily[i].temp.morn) - 273.15) * 1.8 + 32)); °
-            // morn =
-            // day =
-            // eve =
+          // morn =
+          // day =
+          // eve =
           //Humidity:  %
           //uv index: 
-          
+
         }
 
       })
