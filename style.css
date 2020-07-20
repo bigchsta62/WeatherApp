@@ -1,12 +1,48 @@
-.container{
-    border-style: solid;
-    border-color: rgb(255, 0, 0);
-    border-width: 2px;
-    border-radius: 30px;
+body {
+    back;
 }
 .card{
-    min-width: 175x;
-    border-width: 2px;
-    border-radius: 30px;
+    
     
 }
+
+.jumbotron {
+    padding-top: 3rem;
+}
+
+#date {
+margin: 15px;
+}
+
+.card {
+    background-color: cornflowerblue;
+    border-style: solid;
+    border-radius: 30px;
+    border-color: cornflowerblue;    
+    box-shadow: rgb(64, 100, 167) 0 0 3px 2px;
+    min-width: 10rem;
+    max-width: 25rem;
+    margin-right: 2rem;
+    padding: -10px !important;
+}
+
+.card-body {
+    min-width: 10rem;
+    margin-right: 2rem;
+    padding: -10px !important;
+}
+
+
+ul {
+    list-style-type: none;
+    margin-bottom: 1rem;
+    padding-left: 3px;
+    padding-right: 0px;
+  }
+
+/* set a min width for main container 
+fix card padding
+
+
+
+*/

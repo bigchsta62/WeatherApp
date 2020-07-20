@@ -43,14 +43,17 @@ $(document).ready(function () {
       const unix = cityData.dt;
       const milli = unix * 1000;
       const date = new Date(milli);
-      const humanized = date.toLocaleString("en-US", {
+      const humanizedLong = date.toLocaleString("en-US", {
         weekday: "long",
         month: "long",
         day: "numeric",
         year: "numeric",
       });
+      humanizedShort = date.toLocaleString("en-US", {
+        weekday: "long",
+      });
       $("#cityName").text(cityData.name);
-      $("#date").text(humanized);
+      $("#date").text(humanizedLong);
 
       $.ajax({
         url: fivedayURL,
@@ -63,45 +66,56 @@ $(document).ready(function () {
           const todayIcon = onecall.daily[i].weather[0].icon;
           console.log(todayIcon);
 
+          const unix = onecall.daily[i].dt;
+          const milli = unix * 1000;
+          const date = new Date(milli);
+          humanizedShort = date.toLocaleString("en-US", {
+            weekday: "long",
+          });
+
+          const dates = $("<h6>");
+          dates.text(humanizedShort);
+
           const weatherIcon = $("<img>");
           weatherIcon.attr(
             "src",
             "https://openweathermap.org/img/w/" + todayIcon + ".png"
           );
+          weatherIcon.html("<span>" + humanizedLong + "</span>");
 
-          const temp = $("<p>");
+          const temp = $('<p class="font-weight-bold">');
           temp.text("Temperature: ");
 
-          const ul = $("<ul>");
-          const morn = $("<li>");
+          const ul = $('<ul class="font-weight-bold">');
+          const morn = $('<li class="font-weight-normal">');
           morn.text(
             "Morning: " +
-            Math.floor((onecall.daily[i].temp.morn - 273.15) * 1.8 + 32) +
-            "°F"
+              Math.floor((onecall.daily[i].temp.morn - 273.15) * 1.8 + 32) +
+              "°F"
           );
 
-          const day = $("<li>");
+          const day = $('<li class="font-weight-normal">');
           day.text(
             "Day: " +
-            Math.floor((onecall.daily[i].temp.day - 273.15) * 1.8 + 32) +
-            "°F"
+              Math.floor((onecall.daily[i].temp.day - 273.15) * 1.8 + 32) +
+              "°F"
           );
 
-          const eve = $("<li>");
+          const eve = $('<li class="font-weight-normal">');
           eve.text(
             "Evening: " +
-            Math.floor((onecall.daily[i].temp.eve - 273.15) * 1.8 + 32) +
-            "°F"
+              Math.floor((onecall.daily[i].temp.eve - 273.15) * 1.8 + 32) +
+              "°F"
           );
 
-          const humid = $("<p>");
+          const humid = $('<p class="font-weight-bold">');
           humid.text("Humidity: " + onecall.daily[i].humidity + "%");
 
-          const uvi = $("<p>");
+          const uvi = $('<p class="font-weight-bold">');
           uvi.text("UV Index: " + onecall.daily[i].uvi);
 
           ul.append(morn, day, eve);
-          $("#day" + i).append(weatherIcon, temp, ul, humid, uvi);
+          $("#day" + i).append(dates, weatherIcon, temp, ul, humid, uvi);
 
           //Weather icon `<img src="https://openweathermap.org/img/w/${todayIcon}.png"></img>`
           //Temperature: morn, day, eve  (Math.floor(((onecall.daily[i].temp.morn) - 273.15) * 1.8 + 32)); °
@@ -154,11 +168,27 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 
-  var newsurl = "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=84B453ED54DF49BB93F91EC89296F29B"
+  const newsurl =
+    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=84B453ED54DF49BB93F91EC89296F29B";
   $.ajax({
     url: newsurl,
     method: "GET",
   }).then(function (newsStuff) {
     console.log(newsStuff);
+    for (let i = 0; i < 4; i++) {
+      const row = $("<div>");
+      row.addClass("row")
+      const col = $("<div>");
+      col.addClass("col-md-12")
+      const articleBasic = $("<p>");
+      articleBasic.text(
+        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+      );
+      const articleSnippet = $("<p>");
+      articleSnippet.text(newsStuff.articles[i].snippet);
+      col.append(articleBasic, articleSnippet)
+      row.append(col)
+      $("#newsSection").append(row)
+    }
   });
-})  
+});
