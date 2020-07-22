@@ -90,22 +90,22 @@ $(document).ready(function () {
           const morn = $('<li class="font-weight-normal">');
           morn.text(
             "Morning: " +
-              Math.floor((onecall.daily[i].temp.morn - 273.15) * 1.8 + 32) +
-              "°F"
+            Math.floor((onecall.daily[i].temp.morn - 273.15) * 1.8 + 32) +
+            "°F"
           );
 
           const day = $('<li class="font-weight-normal">');
           day.text(
             "Day: " +
-              Math.floor((onecall.daily[i].temp.day - 273.15) * 1.8 + 32) +
-              "°F"
+            Math.floor((onecall.daily[i].temp.day - 273.15) * 1.8 + 32) +
+            "°F"
           );
 
           const eve = $('<li class="font-weight-normal">');
           eve.text(
             "Evening: " +
-              Math.floor((onecall.daily[i].temp.eve - 273.15) * 1.8 + 32) +
-              "°F"
+            Math.floor((onecall.daily[i].temp.eve - 273.15) * 1.8 + 32) +
+            "°F"
           );
 
           const humid = $('<p class="font-weight-bold">');
@@ -131,12 +131,11 @@ $(document).ready(function () {
 
   function geoFindMe() {
     function success(position) {
-      console.log("hi i'm paul");
       console.log(position);
       basicData(
         "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude
       );
-      console.log("i'm praying", basicURL);
+      console.log("i'm praying this works", basicURL);
       weatherAjax();
     }
 
@@ -169,7 +168,7 @@ $(document).ready(function () {
   });
 
   const newsurl =
-    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=84B453ED54DF49BB93F91EC89296F29B";
+    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
   $.ajax({
     url: newsurl,
     method: "GET",
@@ -177,18 +176,21 @@ $(document).ready(function () {
     console.log(newsStuff);
     for (let i = 0; i < 4; i++) {
       const row = $("<div>");
-      row.addClass("row")
+      row.addClass("row");
       const col = $("<div>");
-      col.addClass("col-md-12")
+      col.addClass("col-md-12");
       const articleBasic = $("<p>");
+      const articleLink = $("<a>");
+      articleLink.attr("href", newsStuff.articles[i].link);
       articleBasic.text(
         newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
       );
       const articleSnippet = $("<p>");
       articleSnippet.text(newsStuff.articles[i].snippet);
-      col.append(articleBasic, articleSnippet)
-      row.append(col)
-      $("#newsSection").append(row)
+      articleLink.append(articleBasic);
+      col.append(articleLink, articleSnippet);
+      row.append(col);
+      $("#newsSection").append(row);
     }
   });
 });
