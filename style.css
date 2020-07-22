@@ -1,10 +1,7 @@
 body {
     back;
 }
-.card{
-    
-    
-}
+
 
 .jumbotron {
     padding-top: 3rem;
@@ -38,11 +35,32 @@ ul {
     margin-bottom: 1rem;
     padding-left: 3px;
     padding-right: 0px;
-  }
+}
 
-/* set a min width for main container 
-fix card padding
+.footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #222222;
+    color: #ffffff;
+    padding: 5px 0;
+}
 
+@media only screen and (max-width: 1200px) {
+    #cityName {
+        text-align: center;
+    }
+    .no-height {
+        line-height: 1em;
 
+    }
 
-*/
+}
+@media only screen and (max-width: 575px) {
+    .navbar {
+        float: none;
+        vertical-align: top;
+        justify-content: center;
+    }   
+}

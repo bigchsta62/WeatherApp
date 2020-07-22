@@ -73,8 +73,12 @@ $(document).ready(function () {
             weekday: "long",
           });
 
-          const dates = $("<h6>");
-          dates.text(humanizedShort);
+          const dates = $("<h5>");
+          if(i===0) {
+            dates.text("Today");
+          } else if (i !== 0) {
+            dates.text(humanizedShort);
+          }
 
           const weatherIcon = $("<img>");
           weatherIcon.attr(
@@ -83,7 +87,7 @@ $(document).ready(function () {
           );
           weatherIcon.html("<span>" + humanizedLong + "</span>");
 
-          const temp = $('<p class="font-weight-bold">');
+          const temp = $('<p class="no-height font-weight-bold">');
           temp.text("Temperature: ");
 
           const ul = $('<ul class="font-weight-bold">');
@@ -108,10 +112,10 @@ $(document).ready(function () {
             "°F"
           );
 
-          const humid = $('<p class="font-weight-bold">');
+          const humid = $('<p class="no-height font-weight-bold">');
           humid.text("Humidity: " + onecall.daily[i].humidity + "%");
 
-          const uvi = $('<p class="font-weight-bold">');
+          const uvi = $('<p class="no-height font-weight-bold">');
           uvi.text("UV Index: " + onecall.daily[i].uvi);
 
           ul.append(morn, day, eve);
@@ -167,30 +171,30 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 
-  const newsurl =
-    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
-  $.ajax({
-    url: newsurl,
-    method: "GET",
-  }).then(function (newsStuff) {
-    console.log(newsStuff);
-    for (let i = 0; i < 4; i++) {
-      const row = $("<div>");
-      row.addClass("row");
-      const col = $("<div>");
-      col.addClass("col-md-12");
-      const articleBasic = $("<p>");
-      const articleLink = $("<a>");
-      articleLink.attr("href", newsStuff.articles[i].link);
-      articleBasic.text(
-        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-      );
-      const articleSnippet = $("<p>");
-      articleSnippet.text(newsStuff.articles[i].snippet);
-      articleLink.append(articleBasic);
-      col.append(articleLink, articleSnippet);
-      row.append(col);
-      $("#newsSection").append(row);
-    }
-  });
+//  const newsurl =
+//    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
+//  $.ajax({
+//    url: newsurl,
+//    method: "GET",
+//  }).then(function (newsStuff) {
+//    console.log(newsStuff);
+//    for (let i = 0; i < 4; i++) {
+//      const row = $("<div>");
+//      row.addClass("row");
+//      const col = $("<div>");
+//      col.addClass("col-md-12");
+//      const articleBasic = $("<p>");
+//      const articleLink = $("<a>");
+//      articleLink.attr("href", newsStuff.articles[i].link);
+//      articleBasic.text(
+//        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+//      );
+//      const articleSnippet = $("<p>");
+//      articleSnippet.text(newsStuff.articles[i].snippet);
+//      articleLink.append(articleBasic);
+//      col.append(articleLink, articleSnippet);
+//      row.append(col);
+//      $("#newsSection").append(row);
+//    }
+//  });
 });
