@@ -175,53 +175,22 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 
-// Breaking News API
-  // const newsurl =
-  //   "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
-  // $.ajax({
-  //   url: newsurl,
-  //   method: "GET",
-  // }).then(function (newsStuff) {
-  //   const newsHeading = $("<h1>").text("News");
-  //   $("#newsSection").append(newsHeading);
-  //   console.log(newsStuff);
-  //   for (let i = 0; i < 4; i++) {
-  //     const row = $("<div>");
-  //     row.addClass("row");
-  //     const col = $("<div>");
-  //     col.addClass("col-md-12");
-  //     const articleBasic = $("<p>");
-  //     const articleLink = $("<a>");
-  //     articleLink.attr("target", "_blank");
-  //     articleLink.attr("href", newsStuff.articles[i].link);
-  //     articleBasic.text(
-  //       newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-  //     );
-  //     const articleSnippet = $("<p>");
-  //     articleSnippet.text(newsStuff.articles[i].snippet);
-  //     articleLink.append(articleBasic);
-  //     col.append(articleLink, articleSnippet);
-  //     row.append(col);
-  //     $("#newsSection").append(row);
-  //   }
-  // });
-
-  
-// GNews API
+  // // Breaking News API
   const newsurl =
-    "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
   $.ajax({
     url: newsurl,
     method: "GET",
   }).then(function (newsStuff) {
-    console.log('This is the news', newsStuff);
+   
+    console.log(newsStuff);
     for (let i = 0; i < 4; i++) {
       const row = $("<ul>");
       row.addClass("list-group list-group-flush")
       const col = $("<li>");
       col.addClass("list-group-item lead")
       const articleBasic = $("<a>");
-      const link = newsStuff.articles[i].url;
+      const link = newsStuff.articles[i].link;
       articleBasic.attr('href', link);
       articleBasic.attr('target', "_blank");
       articleBasic.text(
@@ -232,6 +201,35 @@ $(document).ready(function () {
       col.append(articleBasic, articleSnippet);
       row.append(col);
       $("#newsSection").append(row);
-    };
+    }
   });
+
+
+  // // GNews API
+  // const newsurl =
+  //   "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  // $.ajax({
+  //   url: newsurl,
+  //   method: "GET",
+  // }).then(function (newsStuff) {
+  //   console.log('This is the news', newsStuff);
+  //   for (let i = 0; i < 4; i++) {
+  //     const row = $("<ul>");
+  //     row.addClass("list-group list-group-flush")
+  //     const col = $("<li>");
+  //     col.addClass("list-group-item lead")
+  //     const articleBasic = $("<a>");
+  //     const link = newsStuff.articles[i].url;
+  //     articleBasic.attr('href', link);
+  //     articleBasic.attr('target', "_blank");
+  //     articleBasic.text(
+  //       newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+  //     );
+  //     const articleSnippet = $("<p>");
+  //     articleSnippet.text(newsStuff.articles[i].snippet);
+  //     col.append(articleBasic, articleSnippet);
+  //     row.append(col);
+  //     $("#newsSection").append(row);
+  //   };
+  // });
 });
