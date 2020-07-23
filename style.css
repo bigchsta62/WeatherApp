@@ -1,7 +1,5 @@
 
-/* body {
-    back;
-} */
+
 
 .navbar {
     padding: 1px 20px;
@@ -88,11 +86,7 @@ ul {
     background-color: black;
     color: white;
     text-align: center;
- }
-
- 
- 
- 
+}
  
 
 @media only screen and (max-width: 1200px) {
@@ -112,3 +106,4 @@ ul {
         justify-content: center;
     }   
 }
+
