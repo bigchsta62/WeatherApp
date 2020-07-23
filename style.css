@@ -17,6 +17,8 @@
 
 .jumbotron {
     background-color: rgb(236, 236, 236);
+    padding-left: 10px;
+    padding-right: 20px;
 }
 
 #weather {
@@ -41,7 +43,7 @@
 }
 
 .row {
-    padding: 5px 17px;
+    padding: 5px 20px;
 }
 
 .list-group-item {

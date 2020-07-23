@@ -157,6 +157,7 @@ $(document).ready(function () {
   $("#searchBtn").on("click", function () {
     event.preventDefault();
     basicData("q=" + $("#searchSpace").val());
+    console.log($("#searchSpace").val())
     weatherAjax();
   });
 
@@ -168,30 +169,30 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 
-  const newsurl =
-    "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
-  $.ajax({
-    url: newsurl,
-    method: "GET",
-  }).then(function (newsStuff) {
-    console.log('This is the news', newsStuff);
-    for (let i = 0; i < 4; i++) {
-      const row = $("<ul>");
-      row.addClass("list-group list-group-flush")
-      const col = $("<li>");
-      col.addClass("list-group-item lead")
-      const articleBasic = $("<a>");
-      const link = newsStuff.articles[i].url;
-      articleBasic.attr('href', link);
-      articleBasic.attr('target', "_blank");
-      articleBasic.text(
-        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-      );
-      const articleSnippet = $("<p>");
-      articleSnippet.text(newsStuff.articles[i].snippet);
-      col.append(articleBasic, articleSnippet);
-      row.append(col);
-      $("#newsSection").append(row);
-    };
-  });
+  // const newsurl =
+  //   "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  // $.ajax({
+  //   url: newsurl,
+  //   method: "GET",
+  // }).then(function (newsStuff) {
+  //   console.log('This is the news', newsStuff);
+  //   for (let i = 0; i < 4; i++) {
+  //     const row = $("<ul>");
+  //     row.addClass("list-group list-group-flush")
+  //     const col = $("<li>");
+  //     col.addClass("list-group-item lead")
+  //     const articleBasic = $("<a>");
+  //     const link = newsStuff.articles[i].url;
+  //     articleBasic.attr('href', link);
+  //     articleBasic.attr('target', "_blank");
+  //     articleBasic.text(
+  //       newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+  //     );
+  //     const articleSnippet = $("<p>");
+  //     articleSnippet.text(newsStuff.articles[i].snippet);
+  //     col.append(articleBasic, articleSnippet);
+  //     row.append(col);
+  //     $("#newsSection").append(row);
+  //   };
+  // });
 });
