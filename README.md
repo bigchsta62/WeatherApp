@@ -11,3 +11,5 @@ moment.js
 geolocation
 openweathermap
 hiztory
+
+https://bigchsta62.github.io/notFakeNewsAndWeather/
