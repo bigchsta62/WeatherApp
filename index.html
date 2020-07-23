@@ -18,16 +18,15 @@
         <h5 class="text-light" id="date"></h5>
         <div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="First group">
-                <input class="form-control form-control-dark w-100" type="text"
-                    placeholder="Select a City" aria-label="Search" id="searchBox">
-                <button type="submit" class="btn btn-secondary" id="sBtn"><i
-                        class="icon fa fa-search"></i></button>
+                <input class="form-control form-control-dark w-100" type="text" placeholder="Select a City"
+                    aria-label="Search" id="searchBox">
+                <button type="submit" class="btn btn-secondary" id="sBtn"><i class="icon fa fa-search"></i></button>
             </div>
         </div>
     </nav>
     <!-- Weather section -->
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" id="weather">
             <div class="row" id="container1">
                 <div class="col-12 mx-auto">
                     <h1 class="mb-3 display-4 font-weight-bold" id="cityName">Weather</h1>
@@ -70,21 +69,32 @@
                 <p id="demo"></p>
             </div>
         </div>
+
         <!-- News section -->
-        <div class="jumbotron" id="newsSection"></div>
+        <div class="jumbotron" id="newsSection">
+            <div class="lead">
+                <div class="card-header">
+                    Today's Headlines
+                </div>                
+            </div>
+        </div>
+
         <!-- History section -->
-        <div class="jumbotron">
-            <div class="col-md-12 historySec">
-                <h1 class="display-4">This day in history</h1>
-                <p class="lead" id="history">
-                    This is where today's history will go
-                </p>
+        <div class="jumbotron" id="historySection">
+            <div class="lead">
+                <div class="card-header">
+                    This day in history
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item lead" id="history">This is where today's history will go</li>
+                </ul>
             </div>
         </div>
     </div>
+
     <div class="footer">
         <h6>©2020 The Red Team, All Rights Reserved (though we don't have any since it's not a real copyright)</h6>
-        <p>Thanks for coming!</p>
+        <!-- <p>Thanks for coming!</p> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

@@ -1,10 +1,51 @@
-body {
+
+/* body {
     back;
+} */
+
+.navbar {
+    padding: 1px 20px;
 }
 
+.navbar-brand {
+    padding: 1px 0 0 0;
+}
+
+#date {
+    padding: 0;
+}
 
 .jumbotron {
+    background-color: rgb(236, 236, 236);
+}
+
+#weather {
     padding-top: 3rem;
+    background-color: none;
+}
+
+#historySection {
+      padding: 0;
+      background-color: none;
+    }
+
+#newsSection {
+      padding: 0;
+    }
+
+    
+.card-header {
+    background-color: none;
+    font-size: larger;
+    font-weight: 400;
+}
+
+.row {
+    padding: 5px 17px;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.637);
 }
 
 #date {
@@ -38,13 +79,14 @@ ul {
 }
 
 .footer{
-    position: relative;
+    width: 100%;   
+    position: bottom;
     bottom: 0;
     width: 100%;
     text-align: center;
     background-color: #222222;
     color: #ffffff;
-    padding: 5px 0;
+    padding: 3px;
 }
 
 @media only screen and (max-width: 1200px) {
