@@ -65,17 +65,18 @@ $(document).ready(function () {
           console.log(i);
           const todayIcon = onecall.daily[i].weather[0].icon;
           console.log(todayIcon);
-
           const unix = onecall.daily[i].dt;
           const milli = unix * 1000;
           const date = new Date(milli);
           humanizedShort = date.toLocaleString("en-US", {
             weekday: "long",
           });
-
-          const dates = $("<h6>");
-          dates.text(humanizedShort);
-
+          const dates = $("<h5>");
+          if (i === 0) {
+            dates.text("Today");
+          } else {
+            dates.text(humanizedShort);
+          }
           const weatherIcon = $("<img>");
           weatherIcon.attr(
             "src",
@@ -93,14 +94,12 @@ $(document).ready(function () {
               Math.floor((onecall.daily[i].temp.morn - 273.15) * 1.8 + 32) +
               "°F"
           );
-
           const day = $('<li class="font-weight-normal">');
           day.text(
             "Day: " +
               Math.floor((onecall.daily[i].temp.day - 273.15) * 1.8 + 32) +
               "°F"
           );
-
           const eve = $('<li class="font-weight-normal">');
           eve.text(
             "Evening: " +
@@ -113,7 +112,6 @@ $(document).ready(function () {
 
           const uvi = $('<p class="font-weight-bold">');
           uvi.text("UV Index: " + onecall.daily[i].uvi);
-
           ul.append(morn, day, eve);
           $("#day" + i).append(dates, weatherIcon, temp, ul, humid, uvi);
 
@@ -154,10 +152,11 @@ $(document).ready(function () {
 
   geoFindMe();
 
-  $("#searchBtn").on("click", function () {
+  $("#searchBtn").on("click", function (event) {
+    console.log("hi");
     event.preventDefault();
     basicData("q=" + $("#searchSpace").val());
-    console.log($("#searchSpace").val())
+    console.log($("#searchSpace").val());
     weatherAjax();
   });
 
@@ -169,30 +168,36 @@ $(document).ready(function () {
     $("#history").text(response);
   });
 
-  // const newsurl =
-  //   "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
-  // $.ajax({
-  //   url: newsurl,
-  //   method: "GET",
-  // }).then(function (newsStuff) {
-  //   console.log('This is the news', newsStuff);
-  //   for (let i = 0; i < 4; i++) {
-  //     const row = $("<ul>");
-  //     row.addClass("list-group list-group-flush")
-  //     const col = $("<li>");
-  //     col.addClass("list-group-item lead")
-  //     const articleBasic = $("<a>");
-  //     const link = newsStuff.articles[i].url;
-  //     articleBasic.attr('href', link);
-  //     articleBasic.attr('target', "_blank");
-  //     articleBasic.text(
-  //       newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-  //     );
-  //     const articleSnippet = $("<p>");
-  //     articleSnippet.text(newsStuff.articles[i].snippet);
-  //     col.append(articleBasic, articleSnippet);
-  //     row.append(col);
-  //     $("#newsSection").append(row);
-  //   };
-  // });
+  const newsurl =
+    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
+  $.ajax({
+    url: newsurl,
+    method: "GET",
+  }).then(function (newsStuff) {
+    const newsHeading = $("<h1>").text("News");
+    $("#newsSection").append(newsHeading);
+    console.log(newsStuff);
+    for (let i = 0; i < 4; i++) {
+      const row = $("<div>");
+      row.addClass("row");
+      const col = $("<div>");
+      col.addClass("col-md-12");
+      const articleBasic = $("<p>");
+      const articleLink = $("<a>");
+      articleLink.attr("target", "_blank");
+      articleLink.attr("href", newsStuff.articles[i].link);
+      articleBasic.text(
+        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+      );
+      const articleSnippet = $("<p>");
+      articleSnippet.text(newsStuff.articles[i].snippet);
+      articleLink.append(articleBasic);
+      col.append(articleLink, articleSnippet);
+      row.append(col);
+      $("#newsSection").append(row);
+    }
+  });
+  // <div class="spinner-border" role="status">
+  // <span class="sr-only">Loading...</span>
+  // </div>
 });
