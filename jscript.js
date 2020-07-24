@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 
   //Numbers API used for This Day in History section
-  const historyURL = "http://numbersapi.com/" + month + "/" + day + "/date";
+  const historyURL = "https://crossorigin.me/http://numbersapi.com/" + month + "/" + day + "/date";
   let lat = "";
   let long = "";
   let fivedayURL = "";
