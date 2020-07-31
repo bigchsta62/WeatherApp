@@ -1,59 +1,56 @@
 
-/* body {
-    back;
-} */
 
 .navbar {
     padding: 1px 20px;
-}
+};
 
 .navbar-brand {
     padding: 1px 0 0 0;
-}
+};
 
 #date {
     padding: 0;
-}
+};
 
 .jumbotron {
     background-color: rgb(236, 236, 236);
     padding-left: 10px;
     padding-right: 20px;
-}
+};
 
 #weather {
     padding-top: 3rem;
     background-color: none;
-}
+};
 
 
 #historySection {
       padding: 0;
       background-color: none;
-    }
+};
 
 #newsSection {
       padding: 0;
-    }
+};
 
     
 .card-header {
     background-color: none;
     font-size: larger;
     font-weight: 600;
-}
+};
 
 .row {
     padding: 5px 20px;
-}
+};
 
 .list-group-item {
     background-color: rgba(255, 255, 255, 0.637);
-}
+};
 
 #date {
-margin: 15px;
-}
+    margin: 15px;
+};
 
 .card {
     background-color: cornflowerblue;
@@ -65,13 +62,13 @@ margin: 15px;
     max-width: 25rem;
     margin-right: 2rem;
     padding: -10px !important;
-}
+};
 
 .card-body {
     min-width: 10rem;
     margin-right: 2rem;
     padding: -10px !important;
-}
+};
 
 
 ul {
@@ -79,7 +76,7 @@ ul {
     margin-bottom: 1rem;
     padding-left: 3px;
     padding-right: 0px;
-}
+};
 
 .footer {
     position: fixed;
@@ -89,7 +86,7 @@ ul {
     background-color: black;
     color: white;
     text-align: center;
-}
+};
  
 
 @media only screen and (max-width: 1200px) {
@@ -101,11 +98,11 @@ ul {
 
     }
 
-}
+};
 @media only screen and (max-width: 575px) {
     .navbar {
         float: none;
         vertical-align: top;
         justify-content: center;
     }   
-}
+};
