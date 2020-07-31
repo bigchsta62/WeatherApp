@@ -47,7 +47,7 @@ We wanted to liven up the page so we added a This Day in History fact to the pag
 
 
 
-![screenshot](images\Project 1.jpg)
+![screenshot](https://github.com/bigchsta62/notFakeNewsAndWeather/blob/master/images/Project%201.jpg?raw=true)
 
 APIs to use:
 moment.js
