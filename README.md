@@ -47,7 +47,7 @@ We wanted to liven up the page so we added a This Day in History fact to the pag
 
 
 
-
+![screenshot](images\Project 1.jpg)
 
 APIs to use:
 moment.js
