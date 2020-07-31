@@ -1,18 +1,18 @@
 $(document).ready(function () {
   const weatherKey = "1893546eadda6ea230333e67a557c549";
   const date = moment().format("MMMM Do YYYY");
-  console.log(date);
+  
   const month = moment().format("MM");
   const day = moment().format("DD");
-  console.log(month, day);
+  
 
 
   //Numbers API used for This Day in History section
-  const historyURL = "https://crossorigin.me/http://numbersapi.com/" + month + "/" + day + "/date";
-  let lat = "";
-  let long = "";
-  let fivedayURL = "";
-  let basicURL = "";
+  // const historyURL = "https://crossorigin.me/http://numbersapi.com/" + month + "/" + day + "/date";
+  // let lat = "";
+  // let long = "";
+  // let fivedayURL = "";
+  // let basicURL = "";
 
   function basicData(location) {
     basicURL =
@@ -36,12 +36,12 @@ $(document).ready(function () {
       url: basicURL,
       method: "GET",
     }).then(function (cityData) {
-      console.log(cityData);
+      
       lat = cityData.coord.lat;
       long = cityData.coord.lon;
-      console.log("current coords", lat, long);
+      
       fiveDay();
-      console.log("fiveDayUrl", fivedayURL);
+      
       const unix = cityData.dt;
       const milli = unix * 1000;
       const date = new Date(milli);
@@ -61,12 +61,12 @@ $(document).ready(function () {
         url: fivedayURL,
         method: "GET",
       }).then(function (onecall) {
-        console.log(onecall);
+        
         for (let i = 0; i < 6; i++) {
           $("#day" + i).empty();
-          console.log(i);
+          
           const todayIcon = onecall.daily[i].weather[0].icon;
-          console.log(todayIcon);
+          
 
           const unix = onecall.daily[i].dt;
           const milli = unix * 1000;
@@ -137,12 +137,11 @@ $(document).ready(function () {
 
   function geoFindMe() {
     function success(position) {
-      console.log("hi i'm paul");
-      console.log(position);
+      
       basicData(
         "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude
       );
-      console.log("i'm praying", basicURL);
+      
       weatherAjax();
     }
 
@@ -163,63 +162,34 @@ $(document).ready(function () {
   $("#searchBtn").on("click", function () {
     event.preventDefault();
     basicData("q=" + $("#searchSpace").val());
-    console.log($("#searchSpace").val())
+    
     weatherAjax();
   });
 
-  $.ajax({
-    url: historyURL,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response);
-    $("#history").text(response);
-  });
+  // $.ajax({
+  //   url: historyURL,
+  //   method: "GET",
+  // }).then(function (response) {
+  //   console.log(response);
+  //   $("#history").text(response);
+  // });
 
   // // Breaking News API
-  const newsurl =
-    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
-  $.ajax({
-    url: newsurl,
-    method: "GET",
-  }).then(function (newsStuff) {
-   
-    console.log(newsStuff);
-    for (let i = 0; i < 4; i++) {
-      const row = $("<ul>");
-      row.addClass("list-group list-group-flush")
-      const col = $("<li>");
-      col.addClass("list-group-item lead")
-      const articleBasic = $("<a>");
-      const link = newsStuff.articles[i].link;
-      articleBasic.attr('href', link);
-      articleBasic.attr('target', "_blank");
-      articleBasic.text(
-        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-      );
-      const articleSnippet = $("<p>");
-      articleSnippet.text(newsStuff.articles[i].snippet);
-      col.append(articleBasic, articleSnippet);
-      row.append(col);
-      $("#newsSection").append(row);
-    }
-  });
-
-
-  // // GNews API
   // const newsurl =
-  //   "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  //   "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
   // $.ajax({
   //   url: newsurl,
   //   method: "GET",
   // }).then(function (newsStuff) {
-  //   console.log('This is the news', newsStuff);
+   
+  //   console.log(newsStuff);
   //   for (let i = 0; i < 4; i++) {
   //     const row = $("<ul>");
   //     row.addClass("list-group list-group-flush")
   //     const col = $("<li>");
   //     col.addClass("list-group-item lead")
   //     const articleBasic = $("<a>");
-  //     const link = newsStuff.articles[i].url;
+  //     const link = newsStuff.articles[i].link;
   //     articleBasic.attr('href', link);
   //     articleBasic.attr('target', "_blank");
   //     articleBasic.text(
@@ -230,6 +200,35 @@ $(document).ready(function () {
   //     col.append(articleBasic, articleSnippet);
   //     row.append(col);
   //     $("#newsSection").append(row);
-  //   };
+  //   }
   // });
+
+
+  // GNews API
+  const newsurl =
+    "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  $.ajax({
+    url: newsurl,
+    method: "GET",
+  }).then(function (newsStuff) {
+    console.log('This is the news', newsStuff);
+    for (let i = 0; i < 4; i++) {
+      const row = $("<ul>");
+      row.addClass("list-group list-group-flush")
+      const col = $("<li>");
+      col.addClass("list-group-item lead")
+      const articleBasic = $("<a>");
+      const link = newsStuff.articles[i].url;
+      articleBasic.attr('href', link);
+      articleBasic.attr('target', "_blank");
+      articleBasic.text(
+        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+      );
+      const articleSnippet = $("<p>");
+      articleSnippet.text(newsStuff.articles[i].snippet);
+      col.append(articleBasic, articleSnippet);
+      row.append(col);
+      $("#newsSection").append(row);
+    };
+  });
 });
