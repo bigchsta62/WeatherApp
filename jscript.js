@@ -11,12 +11,12 @@ $(document).ready(function () {
   let fivedayURL = "";
   let basicURL = "";
 
-  $.get(
-    "http://numbersapi.com/" + month + "/" + day + "/date",
-    function (data) {
-      $("#number").text(data);
-    }
-  );
+  // $.get(
+  //   "http://numbersapi.com/" + month + "/" + day + "/date",
+  //   function (data) {
+  //     $("#number").text(data);
+  //   }
+  // );
 
   function basicData(location) {
     basicURL =
