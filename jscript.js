@@ -86,15 +86,15 @@ $(document).ready(function () {
             dates.text(humanizedShort);
           }
 
-          const weatherIcon = $("<img>");
+          const weatherIcon = $("<img align='right'/>");
           weatherIcon.attr(
             "src",
-            "https://openweathermap.org/img/w/" + todayIcon + ".png"
+            "https://openweathermap.org/img/w/" + todayIcon + ".png" 
           );
           weatherIcon.html("<span>" + humanizedLong + "</span>");
 
           const temp = $('<p class="font-weight-bold">');
-          temp.text("Temperature: ");
+          temp.text("Temp: ");
 
           const ul = $('<ul class="font-weight-bold">');
           const morn = $('<li class="font-weight-normal">');
@@ -180,50 +180,21 @@ $(document).ready(function () {
   });
 
   // // Breaking News API
-  const newsurl =
-    "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
-  $.ajax({
-    url: newsurl,
-    method: "GET",
-  }).then(function (newsStuff) {
-   
-    console.log(newsStuff);
-    for (let i = 0; i < 4; i++) {
-      const row = $("<ul>");
-      row.addClass("list-group list-group-flush")
-      const col = $("<li>");
-      col.addClass("list-group-item lead")
-      const articleBasic = $("<a>");
-      const link = newsStuff.articles[i].link;
-      articleBasic.attr('href', link);
-      articleBasic.attr('target', "_blank");
-      articleBasic.text(
-        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
-      );
-      const articleSnippet = $("<p>");
-      articleSnippet.text(newsStuff.articles[i].snippet);
-      col.append(articleBasic, articleSnippet);
-      row.append(col);
-      $("#newsSection").append(row);
-    }
-  });
-
-
-  // // GNews API
   // const newsurl =
-  //   "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  //   "https://api.breakingapi.com/news?q=climate&type=headlines&locale=en-US&api_key=C6837518F5EC47FDB49E6D82FB5EE015";
   // $.ajax({
   //   url: newsurl,
   //   method: "GET",
   // }).then(function (newsStuff) {
-  //   console.log('This is the news', newsStuff);
+   
+  //   console.log(newsStuff);
   //   for (let i = 0; i < 4; i++) {
   //     const row = $("<ul>");
   //     row.addClass("list-group list-group-flush")
   //     const col = $("<li>");
   //     col.addClass("list-group-item lead")
   //     const articleBasic = $("<a>");
-  //     const link = newsStuff.articles[i].url;
+  //     const link = newsStuff.articles[i].link;
   //     articleBasic.attr('href', link);
   //     articleBasic.attr('target', "_blank");
   //     articleBasic.text(
@@ -234,6 +205,35 @@ $(document).ready(function () {
   //     col.append(articleBasic, articleSnippet);
   //     row.append(col);
   //     $("#newsSection").append(row);
-  //   };
+  //   }
   // });
+
+
+  // GNews API
+  const newsurl =
+    "https://gnews.io/api/v3/top-news?token=b6dc9f055d1dac03a9f66b0a59f88531";
+  $.ajax({
+    url: newsurl,
+    method: "GET",
+  }).then(function (newsStuff) {
+    console.log('This is the news', newsStuff);
+    for (let i = 0; i < 4; i++) {
+      const row = $("<ul>");
+      row.addClass("list-group list-group-flush")
+      const col = $("<li>");
+      col.addClass("list-group-item lead")
+      const articleBasic = $("<a>");
+      const link = newsStuff.articles[i].url;
+      articleBasic.attr('href', link);
+      articleBasic.attr('target', "_blank");
+      articleBasic.text(
+        newsStuff.articles[i].source.name + ": " + newsStuff.articles[i].title
+      );
+      const articleSnippet = $("<p>");
+      articleSnippet.text(newsStuff.articles[i].snippet);
+      col.append(articleBasic, articleSnippet);
+      row.append(col);
+      $("#newsSection").append(row);
+    };
+  });
 });
