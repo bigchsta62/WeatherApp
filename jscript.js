@@ -164,12 +164,12 @@ $(document).ready(function () {
     weatherAjax();
   });
 
-  $.ajax({
-    url: historyURL,
-    method: "GET",
-  }).then(function (response) {
-    $("#history").text(response);
-  });
+ //$.ajax({
+ //  url: historyURL,
+ //  method: "GET",
+ // }).then(function (response) {
+ //  $("#history").text(response);
+ // });
 
   // GNews API
   const newsurl =
